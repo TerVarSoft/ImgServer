@@ -38,4 +38,6 @@ jspm_packages
 
 #ImgServer
 
-public/*
+public/images/*
+!public/images/test.html
+public/stylesheets/*
