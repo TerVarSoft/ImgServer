@@ -1,4 +1,112 @@
+<header>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">    
+</header>
 
+<main>
+    <nav>
+      <div class="nav-wrapper" style="background-color:#26a69a">
+        <a href="#" class="center brand-logo">Tunari Images Server</a>        
+      </div>
+    </nav>
+     <div class="slider" >
+      <ul class="slides">
+        <li>
+          <img src="/images/Invitaciones/Mementos/ME-001-L.jpg"> <!-- random image -->
+          <div class="caption left-align">
+            <h3>ME-001</h3>
+            <h5 class="light grey-text text-lighten-3">Mementos</h5>
+          </div>
+        </li>
+        <li>
+          <img src="/images/Invitaciones/Matrimonios/MDA-022-L.jpg"> <!-- random image -->
+          <div class="caption right-align">
+            <h3>MDA-022</h3>
+            <h5 class="light grey-text text-lighten-3">Matrimonios</h5>
+          </div>
+        </li>
+        <li>
+          <img src="/images/Invitaciones/Mementos/ME-022-L.jpg"> <!-- random image -->
+          <div class="caption center-align">
+            <h3>ME-022</h3>
+            <h5 class="light grey-text text-lighten-3">Mementos</h5>
+          </div>
+        </li>
+        <li>
+          <img src="/images/Invitaciones/Mementos/ME-057-L.jpg"> <!-- random image -->
+          <div class="caption left-align">
+            <h3>ME-057</h3>
+            <h5 class="light grey-text text-lighten-3">Mementos</h5>
+          </div>
+        </li>
+        <li>
+          <img src="/images/Invitaciones/Promociones/PE-016-L.jpg"> <!-- random image -->
+          <div class="caption right-align">
+            <h3>PE-016</h3>
+            <h5 class="light grey-text text-lighten-3">Promociones</h5>
+          </div>
+        </li>
+       <li>
+          <img src="/images/Invitaciones/Mementos/ME-188-L.jpg"> <!-- random image -->
+          <div class="caption left-align">
+            <h3>ME-188</h3>
+            <h5 class="light grey-text text-lighten-3">Mementos</h5>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <br/>
+    <div class="center">
+        <h5>Perfecto! Volvamos a TunariApp</h5>
+        <a id="return"  class="center waves-effect waves-light btn">TunariApp!</a>
+    </div>
+    
+    <!--<a id="return"  class="center" href="">
+      <h3>Vuelve a la aplicacion haciendo click aqui</h3>
+    </a>-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+</main>
+
+<footer class="page-footer" style="background-color:#26a69a">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Servidor de imagenes para TunariApp</h5>
+        <p class="grey-text text-lighten-4">This is a images server developed by your friends from TerVarSoft.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+    © 2016 Copyright Reserved 
+    <a class="grey-text text-lighten-4 right" href="#!">TerVarSoft</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+    $(document).ready(function(){
+      $('.slider').slider({
+//        full_width: true,
+//        indicators: false
+      });
+      document.getElementById('return').href = window.location.search.split('=')[1] + "#!settings";
+    });
+</script>
+
+<style>
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+</style>
+<!--
 <body style="background-color: #dcdcdc;">
     <h1>Brillante! El servidor de imagenes TUNARI esta listo para ser utilizado!</h1>
     <a id="return" href="">
@@ -11,4 +119,4 @@
 <script>
   document.getElementById('return').href = window.location.search.split('=')[1] + "#!settings";
 </script>
-</body>
+</body>-->
