@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var jwt = require('jwt-simple');
 
 var app = express();
 
@@ -39,6 +40,28 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(function(req, res, next) {
+
+  var token = req.headers.authorization.split(' ')[1];
+  var payload = jwt.decode(token, "tunariSecret");
+
+  if(!payload.sub) {
+    return res.status(401).send({
+      message: "Authentication failed"
+    });
+  } 
+
+  if(!req.headers.authorization) {
+    return res.status(401).send({
+      message: "You are not authorized"
+    })
+  }
+  else {  
+    next();
+  }  
+})
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
