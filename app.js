@@ -31,7 +31,11 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
 
     // Pass to next layer of middleware
-    next();
+     if (req.method == 'OPTIONS') {
+        res.status(200).end();
+    } else {
+        next();
+    }
 });
 
 // uncomment after placing your favicon in /public
@@ -43,23 +47,29 @@ app.use(cookieParser());
 
 app.use(function(req, res, next) {
 
-  var token = req.headers.authorization.split(' ')[1];
-  var payload = jwt.decode(token, "tunariSecret");
-
-  if(!payload.sub) {
-    return res.status(401).send({
-      message: "Authentication failed"
-    });
-  } 
-
   if(!req.headers.authorization) {
     return res.status(401).send({
       message: "You are not authorized"
     })
+  } else {      
+    try {
+      var token = req.headers.authorization.split(' ')[1];
+      var payload = jwt.decode(token, "tunariSecret");
+
+      if(!payload.sub) {
+        return res.status(401).send({ 
+          message: "Authentication failed"
+        });
+      } else {
+        next();
+      }  
+    } catch(err) {
+      console.log(err);
+      return res.status(401).send({ 
+        message: "Authentication failed"
+      });
+    }       
   }
-  else {  
-    next();
-  }  
 })
 
 app.use(express.static(path.join(__dirname, 'public')));
