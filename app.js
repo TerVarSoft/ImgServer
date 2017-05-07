@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var jwt = require('jwt-simple');
 
 var app = express();
 
@@ -30,7 +31,11 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
 
     // Pass to next layer of middleware
-    next();
+     if (req.method == 'OPTIONS') {
+        res.status(200).end();
+    } else {
+        next();
+    }
 });
 
 // uncomment after placing your favicon in /public
@@ -39,6 +44,34 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(function(req, res, next) {
+
+  if(!req.headers.authorization) {
+    return res.status(401).send({
+      message: "You are not authorized"
+    })
+  } else {      
+    try {
+      var token = req.headers.authorization.split(' ')[1];
+      var payload = jwt.decode(token, "tunariSecret");
+
+      if(!payload.sub) {
+        return res.status(401).send({ 
+          message: "Authentication failed"
+        });
+      } else {
+        next();
+      }  
+    } catch(err) {
+      console.log(err);
+      return res.status(401).send({ 
+        message: "Authentication failed"
+      });
+    }       
+  }
+})
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
