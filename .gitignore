@@ -38,6 +38,7 @@ jspm_packages
 
 #ImgServer
 
-public/images/*
-!public/images/test.html
-public/stylesheets/*
+resources/images/*
+!resources/images/test.html
+resources/stylesheets/*
+local.env.js

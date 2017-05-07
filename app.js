@@ -45,6 +45,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(function(req, res, next) {
 
   if(!req.headers.authorization) {
@@ -54,7 +56,7 @@ app.use(function(req, res, next) {
   } else {      
     try {
       var token = req.headers.authorization.split(' ')[1];
-      var payload = jwt.decode(token, "tunariSecret");
+      var payload = jwt.decode(token, process.env.TUNARI_SECRET);
 
       if(!payload.sub) {
         return res.status(401).send({ 
@@ -72,12 +74,10 @@ app.use(function(req, res, next) {
   }
 })
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'resources')));
 
 app.use('/', routes);
 app.use('/users', users);
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
